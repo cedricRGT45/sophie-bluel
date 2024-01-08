@@ -8,7 +8,6 @@ const filtersBar = document.getElementById("filters-bar");
 //initializing gallery content
 export async function generateWorks(item) {
   for (let i = 0; i < item.length; i++) {
-    
     //creating the element tags
     let figure = document.createElement("figure");
     let image = document.createElement("img");
@@ -22,5 +21,3 @@ export async function generateWorks(item) {
     figure.append(figcaption);
   }
 }
-
-

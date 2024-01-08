@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-	
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
@@ -9,26 +9,28 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
+	<script src="https://kit.fontawesome.com/adf26ee57a.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/css/main.css">
 	<script type="module" src="./scripts/main.js" defer></script>
 	<script src="./scripts/config.js" defer></script>
-	
+
 </head>
 
 <body>
-	<header>
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li><a href="#projets">projets</a></li>
-				<li><a href="#contact">contact</a></li>
-				<li><a href="#login">login</a></li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav>
-	</header>
+	<div id="header-admin"></div>
 	<main>
+		<header>
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li><a href="./index.html">projets</a></li>
+					<li><a href="#contact">contact</a></li>
+					<li><a id="btn-login" href="./login.html">login</a></li>
+					<li><a href="#"><img src="./assets/icons/instagram.png" alt="Instagram"></li></a>
+				</ul>
+			</nav>
+		</header>
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
@@ -45,11 +47,13 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2 id="projets">Mes Projets</h2>
+			<div class="title__bar">
+				<h2 id="projets">Mes Projets</h2>
+			</div>
 			<div id="filters-bar">
 			</div>
 			<div class="gallery">
-			
+
 			</div>
 		</section>
 		<section id="contact">
@@ -62,7 +66,7 @@
 				<input type="email" name="email" id="email">
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<input type="submit" value="Envoyer">
+				<input type="submit" value="Envoyer" aria-label="Bouton d'envoi du formulaire de contact">
 			</form>
 		</section>
 	</main>

@@ -1,0 +1,107 @@
+#login,
+.login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#login {
+  width: 100%;
+  margin-top: 9.38rem;
+  margin-bottom: 22rem;
+}
+
+.login__form {
+  width: 25%;
+}
+
+#login a {
+  text-decoration: underline;
+}
+
+.modal__login {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -10;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-animation {
+  animation: slide-in 300ms forwards, skewX 500ms 300ms forwards;
+}
+
+.modal__login-alert {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 25%;
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(182, 102, 60, 0.9);
+  color: white;
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Syne";
+  font-size: large;
+  border-radius: 2rem;
+}
+
+.btn-tryId {
+  border-radius: 2rem;
+  background: #b1663c;
+  border: none;
+  padding: 1rem;
+  font-family: "Syne";
+  color: white;
+}
+
+.btn-tryId:hover {
+  background: white;
+  border: #b1663c;
+  color: #b1663c;
+}
+/*animation*/
+@keyframes skewX {
+  0% {
+    transform: skewX(-15deg);
+  }
+  5% {
+    transform: skewX(15deg);
+  }
+  10% {
+    transform: skewX(-15deg);
+  }
+  15% {
+    transform: skewX(15deg);
+  }
+  20% {
+    transform: skewX(0deg);
+  }
+  100% {
+    transform: skewX(0deg);
+  }
+}
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    left: -700px;
+  }
+  to {
+    opacity: 1;
+    left: 0;
+    z-index: 1;
+  }
+}
