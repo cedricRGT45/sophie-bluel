@@ -27,7 +27,7 @@
 					<li><a href="./index.html">projets</a></li>
 					<li><a href="#contact">contact</a></li>
 					<li><a id="btn-login" href="./login.html">login</a></li>
-					<li><a href="#"><img src="./assets/icons/instagram.png" alt="Instagram"></li></a>
+					<li><a href="#"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
 				</ul>
 			</nav>
 		</header>
@@ -47,13 +47,16 @@
 			</article>
 		</section>
 		<section id="portfolio">
+			<div class="portfolio__modal">
+				<dialog class="portfolio__modal-update" data-backdrop="static">
+			</dialog>
+			</div>
 			<div class="title__bar">
 				<h2 id="projets">Mes Projets</h2>
 			</div>
 			<div id="filters-bar">
 			</div>
 			<div class="gallery">
-
 			</div>
 		</section>
 		<section id="contact">
@@ -66,7 +69,7 @@
 				<input type="email" name="email" id="email">
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<input type="submit" value="Envoyer" aria-label="Bouton d'envoi du formulaire de contact">
+				<input type="submit" value="Envoyer" class="btn" aria-label="Bouton d'envoi du formulaire de contact">
 			</form>
 		</section>
 	</main>

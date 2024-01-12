@@ -1,7 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/********* RESET********/
 html {
   scroll-behavior: smooth;
 }
@@ -134,16 +131,16 @@ body {
   font-size: 14px;
 }
 
-main{
+main {
   max-width: 1140px;
-  margin: 0 auto;
+  margin:auto;
 }
 
 header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 50px 0;
+  margin: 2.37rem 0;
 }
 section {
   margin: 50px 0;
@@ -215,6 +212,9 @@ li a:hover {
   text-align: center;
   margin-bottom: 1em;
 }
+
+/* Styling of the gallery's filters*/
+
 #filters-bar {
   display: flex;
   justify-content: center;
@@ -239,6 +239,9 @@ li a:hover {
   color: #fff;
   background: #1d6154;
 }
+
+/*Styling for the gallery*/
+
 .gallery {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -250,10 +253,13 @@ li a:hover {
 .gallery img {
   width: 100%;
 }
+
+/*Styling for the contact form*/
+
 #contact {
   width: 50%;
   margin: auto;
-  margin-top:3rem;
+  margin-top: 3rem;
 }
 #contact > * {
   text-align: center;
@@ -287,7 +293,7 @@ li a:hover {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"] {
+.btn {
   font-family: "Syne";
   font-weight: 700;
   color: white;
@@ -296,6 +302,7 @@ input[type="submit"] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
+  border: none;
 }
 
 input[type="submit"]:hover {
@@ -308,30 +315,133 @@ footer nav ul {
   margin: 2em;
 }
 
-.edit__bar{
-  width:100%;
-  display:flex;
+/* Styling of the admin mode's header*/
+
+.edit__bar {
+  width: 100%;
+  height: 3.68rem;
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap:1rem;
-  font-size:1rem;
+  gap: 1rem;
+  font-size: 1rem;
   font-family: "work sans";
   font-weight: 400;
-  color:#fff;
-  padding:1.25rem;
-  background:#000;
-  margin:0;
+  color: #fff;
+  background: #000;
+  margin: 0;
 }
 
-.title__bar{
-  display:flex;
+.title__bar {
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap:1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.logged-in{
-  display:none;
+/*Button to filter the gallery*/
+
+.btn-modify {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1.94rem;
+  cursor: pointer;
+}
+
+/*Updating modal*/
+
+.portfolio__modal {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  opacity: 0;
+  z-index: -10;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.portfolio__modal-update {
+ max-width: 30rem;
+  max-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  position: absolute;
+  top: 20rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 0.625rem;
+  padding:  3rem 6.58rem;
+  overflow:clip;
+  border: none;
+}
+
+.gallery-modal {
+  width: 29rem;
+  min-height: 28rem;
+  display: flex;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin: 2.2rem auto 4.21rem auto;
+}
+
+dialog:focus{
+  outline: none;
+  border:none;
+}
+dialog[open] {
+  animation: grow-in 300ms forwards;
+}
+
+.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  font-size: 1.5rem;
+  cursor:pointer;
+}
+
+.image-modal {
+  position: relative;
+  width: 5.44969rem;
+  height: 8.17456rem;
+  object-fit: cover;
+  margin-bottom: 1.2rem;
+}
+.image-modal img {
+  width: 100%;
+  height: 100%;
+}
+
+.modal__separationLine{
+width:26.25rem;
+border: solid #B3B3B3 0.06rem;
+}
+
+.btn__addPhoto {
+  width: 14.8rem;
+  padding:0.75rem 0;
+  margin-top:2.37rem;
+}
+
+.bin {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.3rem;
+  cursor:pointer;
 }
 /* responsive */
 
@@ -355,5 +465,14 @@ footer nav ul {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
+  }
+}
+
+@keyframes grow-in {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }

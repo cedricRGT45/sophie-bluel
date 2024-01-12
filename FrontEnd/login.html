@@ -18,12 +18,12 @@
 </head>
 
 <body>
-    <aside class="modal__login">
-        <div class="modal__login-alert">
+    <div class="modal__login">
+        <dialog class="modal__login-alert">
             <p>Les identifiants indiqués ne sont pas reconnus</p>
-            <button class="btn-tryId">Réessayer</button>
-        </div>
-    </aside>
+            <button class="btn-tryId" autofocus>Réessayer</button>
+        </dialog>
+    </div>
     <main>
         <header>
             <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -46,7 +46,7 @@
                     aria-label="Champ pour indiquer son adresse mail" />
                 <label for="password" class="login__form-password">Mot de passe</label>
                 <input type="password" id="password" size="30" required />
-                <input type="submit" class="login__form-submit" value="Se connecter" aria-label="Bouton pour se connecter à la page d'administration">
+                <input type="submit" class="login__form-submit btn" value="Se connecter" aria-label="Bouton pour se connecter à la page d'administration">
             </form>
             <a href="#">Mot de passe oublié</a>
         </section>

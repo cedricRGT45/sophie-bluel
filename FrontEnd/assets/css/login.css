@@ -33,14 +33,11 @@
   height: 100%;
   opacity: 0;
   z-index: -10;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.modal-animation {
-  animation: slide-in 300ms forwards, skewX 500ms 300ms forwards;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .modal__login-alert {
+  overflow:clip;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -56,8 +53,15 @@
   text-align: center;
   font-family: "Syne";
   font-size: large;
+  border: none;
   border-radius: 2rem;
 }
+/*   Open animation of the dialog  */
+
+dialog[open] {
+  animation: slide-in 300ms forwards, skewX 500ms 300ms forwards;
+}
+
 
 .btn-tryId {
   border-radius: 2rem;
