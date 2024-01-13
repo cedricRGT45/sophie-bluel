@@ -1,3 +1,6 @@
+import { loggedIn } from "./login.js";
+loggedIn();
+
 const apiWorks = await fetch("http://localhost:5678/api/works");
 const works = await apiWorks.json();
 const gallery = document.querySelector(".gallery");
@@ -20,13 +23,12 @@ export async function generateWorks(item) {
     gallery.appendChild(figure);
     figure.appendChild(image);
     figure.append(figcaption);
-    
   }
 }
 
 //Function allowing to open the modal which will update the gallery
 export async function modalGallery() {
-  if (localStorage.getItem("token")) {
+  if (sessionStorage.getItem("token")) {
     const btnModifier = document.querySelector(".btn-modify");
     const portfolioUpdateModal = document.querySelector(
       ".portfolio__modal-update"
@@ -81,9 +83,9 @@ export async function modalGallery() {
           //To add a click event on the bin to remove image
           binModal.addEventListener("click", async () => {
             const workId = binModal.getAttribute("data-id");
-        const token = localStorage.getItem("token")
+            const token = sessionStorage.getItem("token");
             try {
-              // Envoi de la requête DELETE à l'API
+              // To send the deleting request to the API
               const response = await fetch(
                 `http://localhost:5678/api/works/${workId}`,
                 {
@@ -96,17 +98,26 @@ export async function modalGallery() {
                 }
               );
 
-              if (response.status === 200) {
-                // Suppression réussie, mettez à jour la galerie principale
+              if (response.status === 2020) {
+                // If deletion succesful then remove the item
                 const workToRemove = document.querySelector(
-                  `[data-id="${workId}"]`)
-                  gallery.remove(workToRemove);
-                  const workModalToRemove = document.querySelector(
-                    `[data-id="${workId}"]`)
-                    galleryModal.remove(workModalToRemove.parentElement);
-                    console.log("Travail supprimé avec succès !");
-                    generateWorks()
-                    GenerateModalGallery()
+                  `[data-id="${workId}"]`
+                );
+                gallery.remove(workToRemove);
+                const workModalToRemove = document.querySelector(
+                  `[data-id="${workId}"]`
+                );
+                galleryModal.remove(workModalToRemove.parentElement);
+                console.log("Travail supprimé avec succès !");
+                generateWorks(workToRemove);
+                GenerateModalGallery(workModalToRemove);
+              } else {
+                {
+                  const modalAlert = document.createElement("dialog");
+                  modalAlert.classList.add("modal__login-alert");
+                  modalAlert.textContent = "veuillez vous reconnecter";
+                  modalAlert.showModal();
+                }
               }
             } catch (error) {
               console.error("Erreur inattendue :", error);
@@ -119,10 +130,23 @@ export async function modalGallery() {
         portfolioUpdateModal.appendChild(separationLine);
 
         //To create the Add photo's button
-        let addBtn = document.createElement("button");
-        addBtn.classList.add("btn", "btn__addPhoto");
-        addBtn.textContent = "Ajouter une photo";
-        portfolioUpdateModal.appendChild(addBtn);
+          //To create the input fields which will allows to upload the image
+        const addFileInput = document.createElement("input");
+        addFileInput.setAttribute("type", "file");
+        addFileInput.setAttribute(
+          "accept",
+          "image/jpeg, image/png, image/jpg, image/webp"
+        );
+        addFileInput.setAttribute("id", "inputImage");
+        addFileInput.style.display = "none";
+          //to create the label field to style the input button
+        const addFileLabel = document.createElement("label");
+        addFileLabel.setAttribute("for", "inputImage");
+        addFileLabel.classList.add("btn", "btn__addPhoto");
+        addFileLabel.textContent = "Ajouter une photo";
+        addFileLabel.appendChild(addFileInput);
+        portfolioUpdateModal.appendChild(addFileLabel);
+          
       }
 
       //To generate the gallery in the parent div

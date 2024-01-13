@@ -2,6 +2,7 @@ import { generateWorks } from "./works.js";
 
 const apiCategories = await fetch("http://localhost:5678/api/categories");
 const categories = await apiCategories.json();
+console.log(categories)
 const apiWorks = await fetch("http://localhost:5678/api/works");
 const works = await apiWorks.json();
 //generating categories'filters
@@ -11,7 +12,7 @@ export async function generateFilters() {
     const filters = document.createElement("button");
     filters.classList.add("filters");
     // Adding the ID regarding the attribute data-id
-    filters.setAttribute("data-id", works[i].categoryId);
+    filters.setAttribute("data-id", categories[i].id);
     filters.textContent = categories[i].name;
     filtersBar.appendChild(filters);
   }

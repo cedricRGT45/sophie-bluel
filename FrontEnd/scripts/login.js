@@ -32,7 +32,7 @@ export async function loggedIn() {
         // Check the status of the response
         if (response.status === 200) {
           const responseData = await response.json();
-          localStorage.setItem("token", responseData.token);
+          sessionStorage.setItem("token", responseData.token);
           window.location.replace(`index.html`);
           
         } else {
@@ -43,7 +43,7 @@ export async function loggedIn() {
         // Handle any errors that may occur during the login process and display an error alert
         alert(`Error: ${error.message}`);
       }
-      return localStorage.getItem("token")
+      return sessionStorage.getItem("token")
     });
 
   //remove the modal on outside click
@@ -60,7 +60,7 @@ export async function loggedIn() {
 //Editing of the admin mode
 
 export function displayAdminMode() {
-  if (localStorage.getItem("token")) {
+  if (sessionStorage.getItem("token")) {
     //Creating of the admin header
     const header = document.querySelector("#header-admin");
     const adminHeader = document.createElement("div");
@@ -83,7 +83,7 @@ export function displayAdminMode() {
     //To logout the admin page
     document.getElementById("btn-login").innerHTML = "Log Out";
     document.getElementById("btn-login").addEventListener("click", function () {
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
     });
   }
 }
