@@ -52,7 +52,7 @@ export async function loggedIn() {
       modalLoginAlert.close();
     }
   };
-  document.querySelector(".btn-tryId").addEventListener("click", function () {
+  document.querySelector(".btn__tryId").addEventListener("click", function () {
     modalLoginAlert.close();
   });
 }
@@ -74,15 +74,15 @@ export function displayAdminMode() {
 
     const titleBar = document.querySelector(".title__bar");
     const btnUploadGallery = document.createElement("div");
-    btnUploadGallery.classList.add("btn-modify");
+    btnUploadGallery.classList.add("btn__modify");
     btnUploadGallery.innerHTML = `<i class="fa-regular fa-pen-to-square">
     </i>
     <p>modifier</p>`;
     titleBar.appendChild(btnUploadGallery);
 
     //To logout the admin page
-    document.getElementById("btn-login").innerHTML = "Log Out";
-    document.getElementById("btn-login").addEventListener("click", function () {
+    document.getElementById("btn__login").innerHTML = "Log Out";
+    document.getElementById("btn__login").addEventListener("click", function () {
       sessionStorage.removeItem("token");
     });
   }

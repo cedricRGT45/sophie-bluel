@@ -26,10 +26,10 @@ export async function generateWorks(item) {
   }
 }
 
-//Function allowing to open the modal which will update the gallery
+//Function creating the update modal 
 export async function modalGallery() {
   if (sessionStorage.getItem("token")) {
-    const btnModifier = document.querySelector(".btn-modify");
+    const btnModifier = document.querySelector(".btn__modify");
     const portfolioUpdateModal = document.querySelector(
       ".portfolio__modal-update"
     );
@@ -56,13 +56,13 @@ export async function modalGallery() {
         titleModal.textContent = "Galerie photo";
         titleModal.style.color = "#000";
         titleModal.style.font = "400 1.62rem Work Sans";
-        portfolioUpdateModal.prepend(titleModal);
+        portfolioUpdateModal.insertBefore(titleModal, portfolioUpdateModal.firstChild);
 
         for (let i = 0; i < item.length; i++) {
           //creating the element tags
 
           //to generate the image container
-          let figureModal = document.createElement("figure");
+          const figureModal = document.createElement("figure");
           figureModal.classList.add("image-modal");
 
           //To create the delete button
@@ -71,7 +71,7 @@ export async function modalGallery() {
           binModal.classList.add("bin");
           binModal.setAttribute("data-id", works[i].id);
           //To insert the photo
-          let imageModal = document.createElement("img");
+          const imageModal = document.createElement("img");
           imageModal.src = item[i].imageUrl;
 
           //Adding the elements to the modal
@@ -129,30 +129,68 @@ export async function modalGallery() {
         separationLine.classList.add("modal__separationLine");
         portfolioUpdateModal.appendChild(separationLine);
 
-        //To create the Add photo's button
-          //To create the input fields which will allows to upload the image
-        const addFileInput = document.createElement("input");
-        addFileInput.setAttribute("type", "file");
-        addFileInput.setAttribute(
-          "accept",
-          "image/jpeg, image/png, image/jpg, image/webp"
-        );
-        addFileInput.setAttribute("id", "inputImage");
-        addFileInput.style.display = "none";
-          //to create the label field to style the input button
-        const addFileLabel = document.createElement("label");
-        addFileLabel.setAttribute("for", "inputImage");
-        addFileLabel.classList.add("btn", "btn__addPhoto");
-        addFileLabel.textContent = "Ajouter une photo";
-        addFileLabel.appendChild(addFileInput);
-        portfolioUpdateModal.appendChild(addFileLabel);
+        //To create the add photo's button
+        const addButton = document.createElement("button")
+        addButton.classList.add("btn", "btn__addPhoto")
+        addButton.textContent = "Ajouter une photo";
+        addButton.style.cursor = "pointer"
+        portfolioUpdateModal.appendChild(addButton);
+
+        addButton.addEventListener("click", function(){
+
+        //To modify the element for the upload div
+      addButton.style.display = "none"
+      galleryModal.style.display = "none";
+      titleModal.textContent = "Ajout Photo"
           
+        //To create the element for the ulpload div
+
+        //To create the container to upload the picture
+      const uploadDiv = document.createElement("div")
+      uploadDiv.classList.add("upload__div")
+
+      //To create the container to preview the uploaded picture
+      const pictureUploadDiv = document.createElement("span")
+      pictureUploadDiv.classList.add("upload__div-picture")
+
+      //To create the button to upload the picture
+      pictureUploadDiv.innerHTML = `<i class="fa-regular fa-image"></i>`
+      const labelUploadDiv = document.createElement("label")
+      labelUploadDiv.classList.add("upload__div-label")
+      labelUploadDiv.setAttribute("for","input-upload")
+      const inputUploadDiv = document.createElement("input") 
+      inputUploadDiv.classList.add("upload__div-input")
+      inputUploadDiv.setAttribute("id", "input-upload")
+      inputUploadDiv.setAttribute("type", "image")
+      inputUploadDiv.style.display = "none"
+      const buttonValidateUploadDiv = document.createElement("button")
+      buttonValidateUploadDiv.classList.add("btn", "upload__div-validateButton")
+      buttonValidateUploadDiv.textContent = "+ Ajouter photo"
+
+      //To create the info text for image type
+      const subtitleUploadDiv = document.createElement("p")
+      subtitleUploadDiv.textContent = "jpg, png : 4mo max"
+      subtitleUploadDiv.classList.add("upload__div-subtitle")
+      const inputTitreUpload = document.createElement("input")
+      inputTitreUpload.setAttribute("type", "texte")
+
+      //To create the title input field
+      
+        //To link the element to the dom
+        labelUploadDiv.appendChild(buttonValidateUploadDiv)
+        uploadDiv.appendChild(pictureUploadDiv)
+        uploadDiv.appendChild(labelUploadDiv)
+        uploadDiv.appendChild(inputUploadDiv)
+        uploadDiv.appendChild(subtitleUploadDiv)
+        portfolioUpdateModal.prepend(titleModal, uploadDiv);
+      })
       }
 
       //To generate the gallery in the parent div
       portfolioUpdateModal.innerHTML = "";
       GenerateModalGallery(works);
     });
+
     //To close the modal on clicking on the close button or outside of the modal
     closeButton.addEventListener("click", function () {
       portfolioUpdateModal.close();

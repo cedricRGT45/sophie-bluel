@@ -1,3 +1,29 @@
+:root {
+  --main-font: "Work Sans";
+  --accent-color: #1d6154;
+  --upload-div-picture-color: #b9c5cc;
+  --link-color: #000;
+  --filter-width: 6.25rem;
+  --gallery-columns: 1fr 1fr 1fr;
+  --image-width: 4.88rem;
+  --image-height: 6.5rem;
+  --image-margin-bottom: 1.2rem;
+  --modal-width: 39rem;
+  --modal-padding: 3rem 6.58rem;
+  --modal-height: 43rem;
+  --modal-gap: 0.42rem;
+  --separation-line-width: 26.25rem;
+  --add-photo-width: 14.8rem;
+  --add-photo-padding: 0.75rem 0;
+  --add-photo-margin-top: 2.37rem;
+  --bin-margin: 0.3rem;
+  --upload-div-width: 26.25rem;
+  --upload-div-height: 10.5rem;
+  --upload-div-picture-width: 4.75rem;
+  --upload-div-picture-height: 4.75rem;
+  --upload-div-picture-font-size: 4.75rem;
+}
+
 /********* RESET********/
 html {
   scroll-behavior: smooth;
@@ -84,6 +110,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -98,42 +125,19 @@ nav,
 section {
   display: block;
 }
-body {
-  line-height: 1;
-}
-ol,
-ul {
-  list-style: none;
-}
+
 a {
   text-decoration: none;
-  color: inherit;
+  color: var(--link-color);
 }
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-/** end reset css**/
-
 body {
-  font-family: "Work Sans";
+  font-family: var(--main-font);
   font-size: 14px;
 }
 
 main {
   max-width: 1140px;
-  margin:auto;
+  margin: auto;
 }
 
 header {
@@ -142,6 +146,7 @@ header {
   justify-content: space-between;
   margin: 2.37rem 0;
 }
+
 section {
   margin: 50px 0;
 }
@@ -152,11 +157,11 @@ h1 {
   font-family: "Syne";
   font-size: 22px;
   font-weight: 800;
-  color: #b1663c;
+  color: var(--accent-color);
 }
 
 h1 > span {
-  font-family: "Work Sans";
+  font-family: var(--main-font);
   font-size: 10px;
   letter-spacing: 0.1em;
 }
@@ -165,13 +170,15 @@ h2 {
   font-family: "Syne";
   font-weight: 700;
   font-size: 30px;
-  color: #1d6154;
+  color: var(--accent-color);
 }
+
 nav ul {
   display: flex;
   align-items: center;
   list-style-type: none;
 }
+
 nav li {
   padding: 0 10px;
   font-size: 1.2em;
@@ -180,13 +187,16 @@ nav li {
 li a:hover {
   font-weight: 700;
 }
+
 #introduction {
   display: flex;
   align-items: center;
 }
+
 #introduction figure {
   flex: 1;
 }
+
 #introduction img {
   display: block;
   margin: auto;
@@ -196,6 +206,7 @@ li a:hover {
 #introduction article {
   flex: 1;
 }
+
 #introduction h2 {
   margin-bottom: 1em;
 }
@@ -208,6 +219,7 @@ li a:hover {
   margin: auto;
   padding: 1rem;
 }
+
 #portfolio h2 {
   text-align: center;
   margin-bottom: 1em;
@@ -221,30 +233,32 @@ li a:hover {
   margin: 3.19rem auto;
   gap: 0.63rem;
 }
+
 .filters {
   width: auto;
-  min-width: 6.25rem;
+  min-width: var(--filter-width);
   height: 2.3125rem;
   border-radius: 3.75rem;
-  border: 1px solid #1d6154;
-  color: #1d6154;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
   background: none;
-  font-family: Syne;
+  font-family: "Syne";
   font-size: 1rem;
   font-weight: 700;
   flex-wrap: wrap;
   cursor: pointer;
 }
+
 .filters:hover {
   color: #fff;
-  background: #1d6154;
+  background: var(--accent-color);
 }
 
-/*Styling for the gallery*/
+/* Styling for the gallery */
 
 .gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: var(--gallery-columns);
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   margin: auto;
@@ -254,19 +268,22 @@ li a:hover {
   width: 100%;
 }
 
-/*Styling for the contact form*/
+/* Styling for the contact form */
 
 #contact {
   width: 50%;
   margin: auto;
   margin-top: 3rem;
 }
+
 #contact > * {
   text-align: center;
 }
+
 #contact h2 {
   margin-bottom: 20px;
 }
+
 #contact form {
   text-align: left;
   margin-top: 30px;
@@ -281,13 +298,15 @@ li a:hover {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label,
 #login label {
   color: #3d3d3d;
-  font-family: Work Sans;
+  font-family: var(--main-font);
   font-weight: 500;
   margin: 2em 0 1em 0;
 }
+
 #contact textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -297,12 +316,13 @@ li a:hover {
   font-family: "Syne";
   font-weight: 700;
   color: white;
-  background-color: #1d6154;
+  background-color: var(--accent-color);
   margin: 2em auto;
   width: 180px;
   text-align: center;
   border-radius: 60px;
   border: none;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover {
@@ -325,7 +345,7 @@ footer nav ul {
   align-items: center;
   gap: 1rem;
   font-size: 1rem;
-  font-family: "work sans";
+  font-family: var(--main-font);
   font-weight: 400;
   color: #fff;
   background: #000;
@@ -342,7 +362,7 @@ footer nav ul {
 
 /*Button to filter the gallery*/
 
-.btn-modify {
+.btn__modify {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -351,7 +371,7 @@ footer nav ul {
   cursor: pointer;
 }
 
-/*Updating modal*/
+/* Updating modal */
 
 .portfolio__modal {
   width: 100%;
@@ -360,13 +380,12 @@ footer nav ul {
   justify-content: center;
   position: relative;
   opacity: 0;
-  z-index: -10;
   background: rgba(0, 0, 0, 0.3);
 }
 
 .portfolio__modal-update {
- max-width: 30rem;
-  max-height: auto;
+  max-width: var(--modal-width);
+  max-height: var(--modal-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -379,27 +398,25 @@ footer nav ul {
   right: 0;
   background: #fff;
   border-radius: 0.625rem;
-  padding:  3rem 6.58rem;
-  overflow:clip;
+  padding: var(--modal-padding);
+  overflow: clip;
   border: none;
 }
 
 .gallery-modal {
-  width: 29rem;
-  min-height: 28rem;
-  display: flex;
-  align-items: center;
+  width: 26.1rem;
+  height: auto;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.42rem;
-  margin: 2.2rem auto 4.21rem auto;
+  gap: var(--modal-gap);
 }
 
-dialog:focus{
+dialog:focus {
   outline: none;
-  border:none;
+  border: none;
 }
+
 dialog[open] {
   animation: grow-in 300ms forwards;
 }
@@ -410,69 +427,93 @@ dialog[open] {
   right: 0;
   margin: 1rem;
   font-size: 1.5rem;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .image-modal {
   position: relative;
-  width: 5.44969rem;
-  height: 8.17456rem;
+  width: var(--image-width);
+  height: var(--image-height);
   object-fit: cover;
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--image-margin-bottom);
 }
+
 .image-modal img {
   width: 100%;
   height: 100%;
 }
 
-.modal__separationLine{
-width:26.25rem;
-border: solid #B3B3B3 0.06rem;
+.modal__separationLine {
+  width: var(--separation-line-width);
+  border: solid #b3b3b3 0.06rem;
 }
 
 .btn__addPhoto {
-  width: 14.8rem;
-  padding:0.75rem 0;
-  margin-top:2.37rem;
+  width: var(--add-photo-width);
+  padding: var(--add-photo-padding);
+  margin-top: var(--add-photo-margin-top);
 }
 
 .bin {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 0.3rem;
-  cursor:pointer;
+  margin: var(--bin-margin);
 }
-/* responsive */
 
-@media (max-width: 565px) {
-  #filters-bar,
-  #introduction,
-  header {
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-  }
-  .filters {
-    width: 75%;
-    max-width: 12rem;
-    height: auto;
-    padding: 0.3rem;
-  }
-  .gallery {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-  }
+/* To style the upload DIV */
+
+.upload__div {
+  width: var(--upload-div-width);
+  height: var(--upload-div-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #e8f1f6;
+  border-radius: 0.1875rem;
+  padding: 1.19rem;
+}
+
+.upload__div-picture {
+  width: var(--upload-div-picture-width);
+  height: var(--upload-div-picture-height);
+  font-size: var(--upload-div-picture-font-size);
+  color: var(--upload-div-picture-color);
+  margin: 0 0 1.5rem 0;
+}
+
+.upload__div-label {
+  margin: -2rem;
+}
+.upload__div-validateButton {
+  width: 10.8125rem;
+  height: 2.25rem;
+  border-radius: 3.125rem;
+  background: #cbd6dc;
+  color: #306685;
+  text-align: center;
+  font-family: Work Sans;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.upload__div-subtitle {
+  color: #444;
+  text-align: center;
+  font-family: Work Sans;
+  font-size: 0.625rem;
+  font-weight: 400;
+  margin-top:1rem;
 }
 
 @keyframes grow-in {
   from {
-    transform: scale(0);
+    opacity: 0;
+    translate: scale(0);
   }
   to {
-    transform: scale(1);
+    translate: scale(1);
+    opacity: 1;
   }
 }
