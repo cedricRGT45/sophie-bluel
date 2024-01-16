@@ -385,7 +385,7 @@ footer nav ul {
 
 .portfolio__modal-update {
   max-width: var(--modal-width);
-  max-height: var(--modal-height);
+  height: var(--modal-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -418,7 +418,7 @@ dialog:focus {
 }
 
 dialog[open] {
-  animation: grow-in 300ms forwards;
+  animation: grow-in 400ms forwards;
 }
 
 .btn-close {
@@ -472,7 +472,7 @@ dialog[open] {
   align-items: center;
   background: #e8f1f6;
   border-radius: 0.1875rem;
-  padding: 1.19rem;
+  margin: 1rem 0 1.88rem 0;
 }
 
 .upload__div-picture {
@@ -480,20 +480,17 @@ dialog[open] {
   height: var(--upload-div-picture-height);
   font-size: var(--upload-div-picture-font-size);
   color: var(--upload-div-picture-color);
-  margin: 0 0 1.5rem 0;
+  margin: 1rem 0 1rem 0;
 }
 
-.upload__div-label {
-  margin: -2rem;
-}
 .upload__div-validateButton {
   width: 10.8125rem;
-  height: 2.25rem;
+  line-height: 2.25rem;
   border-radius: 3.125rem;
+  margin: 0;
   background: #cbd6dc;
   color: #306685;
-  text-align: center;
-  font-family: Work Sans;
+  font-family: var(--main-font);
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -504,7 +501,37 @@ dialog[open] {
   font-family: Work Sans;
   font-size: 0.625rem;
   font-weight: 400;
-  margin-top:1rem;
+  margin-top: 0.44rem;
+}
+
+/* styling the upload's informations fields  */
+
+#informations-fields {
+  width: var(--upload-div-width);
+  display: flex;
+  flex-direction: column;
+  margin-bottom:2.5rem;
+}
+.upload__div-inputInformation {
+  height:3.18rem;
+  background: #fff;
+  border:none;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  margin-bottom:1.31rem;
+}
+
+.upload__div-labelInformation{
+  font-family: var(--main-font);
+  font-weight:500;
+  margin-bottom: 0.68rem;
+color: #3D3D3D
+}
+
+.upload__div-buttonUpload{
+  width:var(--add-photo-width);
+  padding: var(--add-photo-padding);
+  background: #A7A7A7;
+  margin-bottom:2rem;
 }
 
 @keyframes grow-in {

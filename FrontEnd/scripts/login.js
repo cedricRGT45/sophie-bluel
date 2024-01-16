@@ -18,9 +18,9 @@ export async function loggedIn() {
     console.log(response);
     return response;
   }
+
   const modalLoginAlert = document.querySelector(".modal__login-alert");
   document.querySelector(".login__form").addEventListener("submit", async function (event) {
-      event.preventDefault(); // Stop the form from reloading
 
       // Retrieve values from email and password inputs
       const email = document.getElementById("email").value;
