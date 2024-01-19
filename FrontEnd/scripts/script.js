@@ -65,7 +65,7 @@ function displayFilters() {
                 // Add the "All" category to the API data
                 data.unshift({
                     id: 0,
-                    name: 'All'
+                    name: 'Tous'
                 });
                 // Get DOM elements for attaching filter buttons
                 const portfolio = document.getElementById('portfolio');
@@ -106,11 +106,10 @@ function filterWorks() {
 function displayAdminMode() {
     if (localStorage.getItem('token')) {
         // Display the logout button
-        const log = document.querySelector('nav > ul > li > a');
-        log.setAttribute('id', 'logout');
-       document.querySelector("#logout").textContent = "Log out"
+        const login= document.querySelector("#login");
+       login.textContent = "Log out"
         // Display the black banner
-        const adminHeader = `<div class="edit_mode"><i class="fas fa-regular fa-pen-to-square fa-lg"></i><p>Mode éditionS</p></div>`;
+        const adminHeader = `<div class="edit_mode"><i class="fas fa-regular fa-pen-to-square fa-lg"></i><p>Mode édition</p></div>`;
         const header = document.querySelector("header");
         header.style.marginTop = "6rem";
         header.insertAdjacentHTML("beforebegin", adminHeader);
@@ -177,15 +176,11 @@ function displayModalDeleteWorks() {
     // Create the "Add photo" button to switch to the works addition modal
     const addWorkButton = document.createElement('button');
     addWorkButton.classList.add('link-modal-add');
-    addWorkButton.innerText = 'Add a photo';
-    // Create the "Delete gallery" button
-    const linkDelete = document.createElement('a');
-    linkDelete.href = '#';
-    linkDelete.classList.add('js-delete-works');
-    linkDelete.innerText = 'Delete the gallery';
+    addWorkButton.innerText = 'Ajouter une photo';
+    
     // Attach all the above elements to the DOM
     modalNav.append(closeModalButton);
-    modalWrapper.append(modalNav, titleModal, containerGallery, addWorkButton, linkDelete);
+    modalWrapper.append(modalNav, titleModal, containerGallery, addWorkButton);
 };
 
 /**
@@ -219,18 +214,11 @@ function displayWorksModal() {
                 let deleteButton = document.createElement('i');
                 deleteButton.setAttribute('id', work.id);
                 deleteButton.classList.add('fa-solid', 'fa-trash-can', 'delete-work');
-                // Create the "edit" text under each work
-                let figCaption = document.createElement('figcaption');
-                figCaption.innerText = 'edit';
+               
                 // Attach elements to the DOM
                 gallery.append(figure);
-                figure.append(deleteButton, image, figCaption);
+                figure.append(deleteButton, image);
             };
-            // Create the "move" button on the first work
-            const firstFigure = document.getElementsByClassName('modal-figure-works').item(0);
-            const moveButton = document.createElement('i');
-            moveButton.classList.add('fa-solid', 'fa-up-down-left-right');
-            firstFigure.prepend(moveButton);
         })
 };
 
@@ -271,7 +259,7 @@ function displayModalAddWork() {
     closeModalButton.classList.add('fa-solid', 'fa-xmark', 'close-modal-button');
     // Create the modal title
     const titleModal = document.createElement('h3');
-    titleModal.innerText = 'Add photo';
+    titleModal.innerText = 'Ajout photo';
     // Attach the above elements to the DOM
     modalNav.append(goBackButton, closeModalButton);
     modalWrapper.append(modalNav, titleModal);
@@ -310,7 +298,7 @@ function displayFormAddWork() {
     // Create the file label
     const labelAddImgButton = document.createElement('label');
     labelAddImgButton.setAttribute('for', 'file');
-    labelAddImgButton.innerText = '+ Add photo';
+    labelAddImgButton.innerText = '+ Ajouter photo';
     // Create the file input
     const addImgButton = document.createElement('input');
     addImgButton.type = 'file';
@@ -326,7 +314,7 @@ function displayFormAddWork() {
     // Create the title label
     const labelTitle = document.createElement('label');
     labelTitle.setAttribute('for', 'title');
-    labelTitle.innerText = 'Title';
+    labelTitle.innerText = 'Titre';
     // Create the title input
     let inputTitle = document.createElement('input');
     inputTitle.setAttribute('type', 'text');
@@ -337,7 +325,7 @@ function displayFormAddWork() {
     // Create the category label
     const labelCategory = document.createElement('label');
     labelCategory.setAttribute('for', 'category');
-    labelCategory.innerText = 'Category';
+    labelCategory.innerText = 'Catégorie';
     // Create the category select
     const selectCategory = document.createElement('select');
     selectCategory.setAttribute('id', 'selectCategory');
@@ -556,7 +544,7 @@ document.addEventListener('click', function (event) {
  */
 async function init() {
     displayWorks();
-    await displayFilters();
+     displayFilters();
     displayAdminMode();
 };
 
