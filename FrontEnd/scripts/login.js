@@ -1,89 +1,42 @@
-//session.storage
+// Retrieving the form element
+const form = document.querySelector("form");
 
-//Checking the mail and password input
-
-// Creating a listener for the submit form to verify the email and password
-export async function loggedIn() {
-  // Function to send a login request to the server
-  async function loginUser(email, password) {
-    const response = await fetch("http://localhost:5678/api/users/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-  
-    console.log(response);
-    return response;
-  }
-
-  const modalLoginAlert = document.querySelector(".modal__login-alert");
-  document.querySelector(".login__form").addEventListener("submit", async function (event) {
-
-      // Retrieve values from email and password inputs
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      try {
-        // Attempt to log in user by calling the loginUser function
-        const response = await loginUser(email, password);
-        // Check the status of the response
-        if (response.status === 200) {
-          const responseData = await response.json();
-          sessionStorage.setItem("token", responseData.token);
-          window.location.replace(`index.html`);
-          
-        } else {
-          // If unsuccessful, display an error alert
-          modalLoginAlert.showModal(); // allows accesibility by using the keyboard
-        }
-      } catch (error) {
-        // Handle any errors that may occur during the login process and display an error alert
-        alert(`Error: ${error.message}`);
-      }
-      return sessionStorage.getItem("token")
-    });
-
-  //remove the modal on outside click
-  window.onclick = function (event) {
-    if (event.target === modalLoginAlert) {
-      modalLoginAlert.close();
-    }
+/**
+ * Login
+ * @param {string} event Click on the login button
+ */
+async function onSubmit(event) {
+  event.preventDefault();
+  // Defining user credentials
+  let user = {
+    email: form.email.value,
+    password: form.password.value,
   };
-  document.querySelector(".btn__tryId").addEventListener("click", function () {
-    modalLoginAlert.close();
+
+  // Fetching data from the API
+  let response = await fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify(user),
   });
-}
 
-//Editing of the admin mode
+  let result = await response.json();
 
-export function displayAdminMode() {
-  if (sessionStorage.getItem("token")) {
-    //Creating of the admin header
-    const header = document.querySelector("#header-admin");
-    const adminHeader = document.createElement("div");
-    adminHeader.classList.add("edit__bar");
-    adminHeader.innerHTML = `<i class="fa-regular fa-pen-to-square">
-		</i>
-		<p>Mode édition</p>`;
-    header.prepend(adminHeader);
-
-    //creating the update gallery button
-
-    const titleBar = document.querySelector(".title__bar");
-    const btnUploadGallery = document.createElement("div");
-    btnUploadGallery.classList.add("btn__modify");
-    btnUploadGallery.innerHTML = `<i class="fa-regular fa-pen-to-square">
-    </i>
-    <p>modifier</p>`;
-    titleBar.appendChild(btnUploadGallery);
-
-    //To logout the admin page
-    document.getElementById("btn__login").innerHTML = "Log Out";
-    document.getElementById("btn__login").addEventListener("click", function () {
-      sessionStorage.removeItem("token");
-    });
+  // If the credentials are correct
+  if (response.status === 200) {
+    localStorage.setItem("token", result.token);
+    window.location.replace(`index.html`);
+    // Otherwise, if the credentials are incorrect
+  } else if (response.status === 404 || response.status === 401) {
+    form.email.value = "";
+    form.password.value = "";
+    alert("Error in username or password");
   }
 }
+
+form.addEventListener("submit", onSubmit);
+
+const body = document.querySelector("body");
+body.style.height = "100%";
