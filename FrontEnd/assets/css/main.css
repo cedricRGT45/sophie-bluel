@@ -404,14 +404,10 @@ footer nav ul {
 
 #modal {
   position: fixed;
-  display: flex;
   align-items: center;
   justify-content: center;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
 }
 
 #modal-gallery {
@@ -480,18 +476,6 @@ footer nav ul {
   border-radius: 2px;
   left: 54px;
   top: 6px;
-  color: #ffffff;
-  font-size: 11px;
-}
-
-.fa-up-down-left-right {
-  position: absolute;
-  background-color: #000000;
-  padding: 4px;
-  border: none;
-  border-radius: 2px;
-  top: 6px;
-  left: 30px;
   color: #ffffff;
   font-size: 11px;
 }

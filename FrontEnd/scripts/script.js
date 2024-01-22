@@ -1,9 +1,9 @@
-const urlCategories = 'http://localhost:5678/api/categories';
-const urlWorks = 'http://localhost:5678/api/works';
-const urlLogin = 'http://localhost:5678/api/users/login';
+const urlCategories = 'https://sophiebluel-1jgn.onrender.com/api/categories';
+const urlWorks = 'https://sophiebluel-1jgn.onrender.com/api/works';
+const urlLogin = 'https://sophiebluel-1jgn.onrender.com/api/users/login';
 let selectedCategoryId = 0; // by default, display all works
 
-/**
+/**https://portfolio-sophie-bluel-api.onrender.com/
  * Delete works from the index.html gallery
  */
 function deleteWorks() {
@@ -104,7 +104,7 @@ function filterWorks() {
  * Display admin mode if the token has been correctly stored during login
  */
 function displayAdminMode() {
-    if (localStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
         // Display the logout button
         const login= document.querySelector("#login");
        login.textContent = "Log out"
@@ -125,34 +125,17 @@ function displayAdminMode() {
         editButtonGallery.classList.add('open-modal');
         // Disable the filtering function
         const divFilters = document.getElementById('container-filters');
-        divFilters.style.display = 'none';
     };
 };
 
 /**
  * Open the modal
  */
+const modal = document.querySelector('#modal');
 function openModal() {
-    const modal = document.querySelector('#modal');
-    modal.style.display = null;
-    modal.removeAttribute('aria-hidden');
-    modal.setAttribute('aria-modal', 'true');
+    modal.showModal()
     displayModalDeleteWorks();
     displayWorksModal();
-};
-
-/**
- * Close the modal
- */
-function closeModal() {
-    const modal = document.querySelector('#modal');
-    modal.style.display = 'none';
-    modal.setAttribute('aria-hidden', 'true');
-    modal.removeAttribute('aria-modal');
-    const modalWrapper = document.querySelector('.modal-wrapper');
-    while (modalWrapper.firstChild) {
-        modalWrapper.removeChild(modalWrapper.firstChild);
-    };
 };
 
 /**
@@ -161,7 +144,7 @@ function closeModal() {
 function displayModalDeleteWorks() {
     // Get the works deletion modal
     const modalWrapper = document.querySelector('.modal-wrapper-delete');
-    // Create the navigation element between the two modals
+    // Create the container between the two modals
     const modalNav = document.createElement('div');
     modalNav.classList.add('modal-nav');
     // Create the modal close button
@@ -226,11 +209,11 @@ function displayWorksModal() {
  * Delete works from the API
  */
 function deleteWorksData(id) {
-    fetch(`http://localhost:5678/api/works/${id}`, {
+    fetch(`https://sophiebluel-1jgn.onrender.com/api/works/${id}`, {
         method: 'DELETE',
         headers: {
             'content-type': "application/Json",
-            'authorization': "Bearer " + localStorage.getItem("token"),
+            'authorization': "Bearer " + sessionStorage.getItem("token"),
         },
     })
         .then((response) => {
@@ -242,13 +225,13 @@ function deleteWorksData(id) {
 };
 
 /**
- * Display the modal in works addition mode
+ * Display the modal in addition mode
  */
 function displayModalAddWork() {
     // Get the works deletion modal
     const modalWrapper = document.querySelector('.modal-wrapper-add');
     modalWrapper.style.display = null;
-    // Create the navigation element between the two modals
+    // Create the container for the navigation  between the two modals
     const modalNav = document.createElement('div');
     modalNav.classList.add('modal-nav');
     // Create the "Go back" button to the previous modal
@@ -410,7 +393,7 @@ function sendData() {
     formData.append('category', category);
 
     // Get the token 
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     // Send data to the server with an HTTP POST request
     fetch(urlWorks, {
         method: 'POST',
@@ -449,7 +432,7 @@ document.addEventListener('click', function (event) {
  */
 document.addEventListener('click', function (event) {
     if (event.target.matches('#logout')) {
-        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
     };
 });
 
@@ -458,7 +441,8 @@ document.addEventListener('click', function (event) {
  */
 document.addEventListener('click', function (event) {
     if (event.target.matches('.open-modal')) {
-        openModal();
+   event.stopPropagation()
+           openModal()
     };
 });
 
@@ -467,9 +451,10 @@ document.addEventListener('click', function (event) {
  */
 document.addEventListener('click', function (event) {
     if (event.target.matches('.close-modal-button')) {
-        closeModal();
+        modal.close();
     } else if (event.target.matches('#modal')) {
-        closeModal();
+        modal.close();
+
     };
 });
 
@@ -513,12 +498,17 @@ document.addEventListener('change', function (event) {
         const imgPreview = document.querySelector('.img-preview');
         const file = event.target.files[0];
         const reader = new FileReader();
+        const allowedFormats = ["image/jpeg", "image/png"];
         if (file.size <= 4 * 1024 * 1024) {
             reader.addEventListener('load', () => {
                 imgPreview.src = reader.result;
             });
             if (file) {
                 reader.readAsDataURL(file);
+            }
+            if (!allowedFormats.includes(file.type)) {
+                alert('SEULEMENT LES FICHIERS EN .JPG OU .PNG SONT ACCEPTÉS');
+                imgPreview.src = 'assets/icons/icon-img.png'
             }
         } else {
             alert('File size must be less than 4 MB');

@@ -14,7 +14,7 @@ async function onSubmit(event) {
   };
 
   // Fetching data from the API
-  let response = await fetch("http://localhost:5678/api/users/login", {
+  let response = await fetch("https://sophiebluel-1jgn.onrender.com/api/users/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -26,7 +26,7 @@ async function onSubmit(event) {
 
   // If the credentials are correct
   if (response.status === 200) {
-    localStorage.setItem("token", result.token);
+    sessionStorage.setItem("token", result.token);
     window.location.replace(`index.html`);
     // Otherwise, if the credentials are incorrect
   } else if (response.status === 404 || response.status === 401) {
