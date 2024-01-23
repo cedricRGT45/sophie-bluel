@@ -130,14 +130,30 @@ function displayAdminMode() {
     // Disable the filtering function
     const divFilters = document.getElementById("container-filters");
     editButtonGallery.addEventListener("click", function (event) {
-      modal.showModal();
+      clearModal()
       displayModalDeleteWorks();
       displayWorksModal();
     });
   }
 }
 
+//To prevent duplicated content upon the reopenning of the modal
+function clearModal() {
+  const modalWrapperDelete = document.querySelector(".modal-wrapper-delete");
+  const modalWrapperAdd = document.querySelector(".modal-wrapper-add");
 
+  if (modalWrapperDelete) {
+    while (modalWrapperDelete.firstChild) {
+      modalWrapperDelete.removeChild(modalWrapperDelete.firstChild);
+    }
+  }
+
+  if (modalWrapperAdd) {
+    while (modalWrapperAdd.firstChild) {
+      modalWrapperAdd.removeChild(modalWrapperAdd.firstChild);
+    }
+  }
+}
 
 /**
  * Display the modal in works deletion mode
@@ -519,12 +535,14 @@ document.addEventListener("change", function (event) {
         reader.readAsDataURL(file);
       }
       if (!allowedFormats.includes(file.type)) {
-        imgPreview.src = "assets/icons/icon-img.png";
         modalAlert("SEULEMENT LES FICHIERS EN .JPG OU .PNG SONT ACCEPTÉS");
+        imgPreview.src = "assets/icons/icon-img.png";
       }
     }
     if (file.size > 4 * 1024 * 1024) {
       modalAlert("La taille maximale autorisée est de 4mo");
+      imgPreview.src = "assets/icons/icon-img.png";
+
     }
   }
 });
