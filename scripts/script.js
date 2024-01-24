@@ -453,6 +453,22 @@ function sendData() {
     .catch((error) => console.error("Error sending data: ", error));
 }
 
+/**
+ * Update the gallery on the modal and the page without reloading
+ */
+async function updateGallery() {
+  // Update the main gallery on the page
+  displayWorks();
+
+  // Update the modal gallery
+  const modalGallery = document.getElementById("modal-gallery");
+  while (modalGallery.firstChild) {
+    modalGallery.removeChild(modalGallery.firstChild);
+  }
+  await displayWorksModal();
+}
+
+
 // Event listings
 /**
  * EVENT: Filter works when clicking on the chosen category
@@ -501,6 +517,8 @@ document.addEventListener("click", await function (event) {
     event.preventDefault(); // Ajoutez cette ligne pour empêcher le rechargement de la page
     deleteWorksData(event.target.id);
     modalAlert("Deletion of work id=" + event.target.id);
+      // Update galleries after deletion
+      updateGallery();
   }
 });
 
