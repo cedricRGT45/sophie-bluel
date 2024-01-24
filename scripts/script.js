@@ -241,7 +241,7 @@ function deleteWorksData(id) {
       }
 
       // Updating the modal
-      displayWorksModal();
+      displayModalDeleteWorks();
     }
   });
 }
