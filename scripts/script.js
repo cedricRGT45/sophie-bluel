@@ -158,7 +158,7 @@ function clearModal() {
 /**
  * Display the modal in works deletion mode
  */
-function displayModalDeleteWorks() {
+ function displayModalDeleteWorks() {
   // Get the works deletion modal
   const modalWrapper = document.querySelector(".modal-wrapper-delete");
   // Create the container between the two modals
@@ -186,7 +186,7 @@ function displayModalDeleteWorks() {
 /**
  * Display works in the modal based on API data
  */
-function displayWorksModal() {
+async function displayWorksModal() {
   // Fetch API data
   fetch(urlWorks)
     .then(function (response) {
@@ -242,6 +242,9 @@ function deleteWorksData(id) {
 
       // Updating the modal
       displayModalDeleteWorks();
+      displayWorksModal();
+      // Update the main gallery
+      displayWorks();
     }
   });
 }
@@ -493,12 +496,11 @@ document.addEventListener("click", function (event) {
 /**
  * EVENT: Delete works on the modal and index.html when clicking on the trash can
  */
-document.addEventListener("click", function (event) {
+document.addEventListener("click", await function (event) {
   if (event.target.matches(".delete-work")) {
-    modalAlert("Deletion of work id=" + event.target.id);
+    event.preventDefault(); // Ajoutez cette ligne pour empêcher le rechargement de la page
     deleteWorksData(event.target.id);
-    event.preventDefault();
-    window.preventDefault();
+    modalAlert("Deletion of work id=" + event.target.id);
   }
 });
 
