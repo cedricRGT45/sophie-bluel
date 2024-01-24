@@ -403,47 +403,51 @@ footer nav ul {
 }
 
 #modal {
-  position: fixed;
+  width: 39.75rem;
+  height: 43rem;
+  position:relative;
+  padding:0 0 3rem 0;
+  overflow-y: auto;
   align-items: center;
   justify-content: center;
-  top: 0;
+  top: 40rem;
   left: 0;
   border:none;
+  border-radius: 0.625rem;
 }
 
 #modal-gallery {
-  margin: 46px 100px 20px 100px;
+  width:26.9rem;
+  height:100%;
+  margin: 2.88rem auto 2.37rem auto;
+  padding-bottom:1rem;
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 30px;
   gap: 10px;
   border-bottom: solid 1px #b3b3b3;
 }
 
 .modal-wrapper-delete,
 .modal-wrapper-add {
-  overflow: auto;
-  width: 630px;
-  max-width: calc(100vw - 100px);
-  max-height: calc(105vh - 100px);
+  width:100%;
+  height: 100%;
   background-color: #ffffff;
   border-radius: 10px;
   display: flex;
   align-content: center;
   flex-direction: column;
-  padding-bottom: 30px;
 }
 
-.modal-wrapper-delete .modal-nav {
-  display: flex;
+.modal-nav {
+  display:flex;
   justify-content: flex-end;
-  margin: 32px 32px 0px 32px;
+  width:95%;
+  margin:.62rem auto;
 }
 
 .modal-wrapper-add .modal-nav {
   display: flex;
   justify-content: space-between;
-  margin: 32px 32px 0px 32px;
 }
 
 .go-back-button {
@@ -458,13 +462,14 @@ footer nav ul {
 }
 
 .modal-figure-works {
-  width: 78px;
-  height: 128px;
+  max-width: 4.83rem;
+  max-height: 6.77rem;
   position: relative;
 }
 
 .modal-figure-works img {
-  width: 100%;
+  max-width: 4.83rem;
+max-height: 6.77rem;
   max-height: 104px;
   object-fit: cover;
 }
@@ -633,6 +638,18 @@ dialog::backdrop{
   border: #b1663c;
   color: #b1663c;
 }
+
+
+/*responsive*/
+
+@media (max-width: 1024px){
+  body{
+    display:flex;
+  flex-direction:column;
+flex-wrap:wrap;
+}
+};
+  
 /*animation*/
 @keyframes skewX {
   0% {

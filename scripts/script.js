@@ -1,8 +1,8 @@
 import { modalAlert } from "./login.js";
 
-const urlCategories = "https://sophiebluel-1jgn.onrender.com/api/categories";
-const urlWorks = "https://sophiebluel-1jgn.onrender.com/api/works";
-const urlLogin = "https://sophiebluel-1jgn.onrender.com/api/users/login";
+const urlCategories = "http://localhost:5678/api/categories";
+const urlWorks = "http://localhost:5678/api/works";
+const urlLogin = "http://localhost:5678/api/users/login";
 let selectedCategoryId = 0; // by default, display all works
 
 /**https://portfolio-sophie-bluel-api.onrender.com/
@@ -130,7 +130,7 @@ function displayAdminMode() {
     // Disable the filtering function
     const divFilters = document.getElementById("container-filters");
     editButtonGallery.addEventListener("click", function (event) {
-      clearModal()
+      clearModal();
       displayModalDeleteWorks();
       displayWorksModal();
     });
@@ -169,7 +169,7 @@ function displayModalDeleteWorks() {
   closeModalButton.classList.add("fa-solid", "fa-xmark", "close-modal-button");
   // Create the modal title
   const titleModal = document.createElement("h3");
-  titleModal.innerText = "Photo gallery";
+  titleModal.innerText = "Gallerie Photo";
   // Create the gallery container
   const containerGallery = document.createElement("div");
   containerGallery.setAttribute("id", "modal-gallery");
@@ -226,16 +226,15 @@ function displayWorksModal() {
  * Delete works from the API
  */
 function deleteWorksData(id) {
-  fetch(`https://sophiebluel-1jgn.onrender.com/api/works/${id}`, {
+  fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/Json",
       authorization: "Bearer " + sessionStorage.getItem("token"),
     },
   }).then((response) => {
-    if (response.status === 201) {
+    if (response.status === 200) {
       displayWorksModal();
-      displayWorks();
     }
   });
 }
@@ -297,6 +296,7 @@ function displayFormAddWork() {
   // Create the file label
   const labelAddImgButton = document.createElement("label");
   labelAddImgButton.setAttribute("for", "file");
+  labelAddImgButton.classList.add("labelAddImg");
   labelAddImgButton.innerText = "+ Ajouter photo";
   // Create the file input
   const addImgButton = document.createElement("input");
@@ -307,6 +307,7 @@ function displayFormAddWork() {
   addImgButton.required = true;
   // Create the file information line
   const infoAddImg = document.createElement("p");
+  infoAddImg.classList.add("info-addImg");
   infoAddImg.innerText = "jpg, png: max 4MB";
   // Create the form information container
   const containerFormInfo = document.createElement("div");
@@ -435,8 +436,6 @@ function sendData() {
       if (response.ok) {
         console.log("Data sent successfully!");
         goBackModal();
-        displayWorksModal();
-        displayWorks();
       } else {
         console.error("Error sending data: ", response.status);
       }
@@ -478,10 +477,8 @@ document.addEventListener("click", function (event) {
  */
 document.addEventListener("click", function (event) {
   if (event.target.matches(".close-modal-button")) {
-
     modal.close();
   } else if (event.target.matches("#modal")) {
-
     modal.close();
   }
 });
@@ -491,10 +488,9 @@ document.addEventListener("click", function (event) {
  */
 document.addEventListener("click", function (event) {
   if (event.target.matches(".delete-work")) {
+    event.preventDefault();
+    modalAlert("Deletion of work id=" + event.target.name);
     deleteWorksData(event.target.id);
-    alert("Deletion of work id=" + event.target.id);
-    displayWorksModal();
-    displayWorks();
   }
 });
 
@@ -514,6 +510,7 @@ document.addEventListener("click", function (event) {
  */
 document.addEventListener("click", function (event) {
   if (event.target.matches(".go-back-button")) {
+    event.preventDefault();
     goBackModal();
   }
 });
@@ -524,12 +521,16 @@ document.addEventListener("click", function (event) {
 document.addEventListener("change", function (event) {
   if (event.target.matches(".input-image")) {
     const imgPreview = document.querySelector(".img-preview");
+    const labelAddImg = document.querySelector(".labelAddImg");
+    const infoAddImg = document.querySelector(".info-addImg");
     const file = event.target.files[0];
     const reader = new FileReader();
     const allowedFormats = ["image/jpeg", "image/png"];
     if (file.size <= 4 * 1024 * 1024) {
       reader.addEventListener("load", () => {
         imgPreview.src = reader.result;
+        labelAddImg.style.display = "none";
+        infoAddImg.style.display = "none";
       });
       if (file) {
         reader.readAsDataURL(file);
@@ -542,7 +543,6 @@ document.addEventListener("change", function (event) {
     if (file.size > 4 * 1024 * 1024) {
       modalAlert("La taille maximale autorisée est de 4mo");
       imgPreview.src = "assets/icons/icon-img.png";
-
     }
   }
 });
@@ -551,11 +551,12 @@ document.addEventListener("change", function (event) {
  * EVENT: Send form data when clicking on the submit button
  */
 document.addEventListener("click", function (event) {
+  event.preventDefault;
   if (event.target.matches(".js-add-works")) {
+    event.preventDefault();
     const formAddWorks = document.querySelector(".form-add-works");
     if (formAddWorks.checkValidity()) {
       sendData();
-      displayWorks();
     }
   }
 });
