@@ -158,7 +158,7 @@ function clearModal() {
 /**
  * Display the modal in works deletion mode
  */
- function displayModalDeleteWorks() {
+function displayModalDeleteWorks() {
   // Get the works deletion modal
   const modalWrapper = document.querySelector(".modal-wrapper-delete");
   // Create the container between the two modals
@@ -468,7 +468,6 @@ async function updateGallery() {
   await displayWorksModal();
 }
 
-
 // Event listings
 /**
  * EVENT: Filter works when clicking on the chosen category
@@ -512,15 +511,18 @@ document.addEventListener("click", function (event) {
 /**
  * EVENT: Delete works on the modal and index.html when clicking on the trash can
  */
-document.addEventListener("click", await function (event) {
-  if (event.target.matches(".delete-work")) {
-    event.preventDefault(); // Ajoutez cette ligne pour empêcher le rechargement de la page
-    deleteWorksData(event.target.id);
-    modalAlert("Deletion of work id=" + event.target.id);
+document.addEventListener(
+  "click",
+  await function (event) {
+    if (event.target.matches(".delete-work")) {
+      event.preventDefault(); // Ajoutez cette ligne pour empêcher le rechargement de la page
+      deleteWorksData(event.target.id);
+      modalAlert("Suppression de la photo effectuée");
       // Update galleries after deletion
       updateGallery();
+    }
   }
-});
+);
 
 /**
  * EVENT: Transfer to the work addition modal when clicking on the add photo button
@@ -583,6 +585,8 @@ document.addEventListener("click", function (event) {
     const formAddWorks = document.querySelector(".form-add-works");
     if (formAddWorks.checkValidity()) {
       sendData();
+      updateGallery();
+      goBackModal();
     }
   }
 });
