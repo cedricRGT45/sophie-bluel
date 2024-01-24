@@ -1,8 +1,8 @@
 import { modalAlert } from "./login.js";
 
 const urlCategories = "https://portfolio-sophie-bluel-api.onrender.com/api/categories";
-const urlWorks = "https://portfolio-sophie-bluel-api.onrender.com/works";
-const urlLogin = "https://portfolio-sophie-bluel-api.onrender.com/users/login";
+const urlWorks = "https://portfolio-sophie-bluel-api.onrender.com/api/works";
+const urlLogin = "https://portfolio-sophie-bluel-api.onrender.com/api/users/login";
 let selectedCategoryId = 0; // by default, display all works
 
 /**https://portfolio-sophie-bluel-api.onrender.com/
