@@ -296,7 +296,7 @@ function displayFormAddWork() {
   // Create the file label
   const labelAddImgButton = document.createElement("label");
   labelAddImgButton.setAttribute("for", "file");
-  labelAddImgButton.classList.add("labelAddImg");
+  labelAddImgButton.classList.add("labelAddImg")
   labelAddImgButton.innerText = "+ Ajouter photo";
   // Create the file input
   const addImgButton = document.createElement("input");
@@ -307,7 +307,7 @@ function displayFormAddWork() {
   addImgButton.required = true;
   // Create the file information line
   const infoAddImg = document.createElement("p");
-  infoAddImg.classList.add("info-addImg");
+  infoAddImg.classList.add("info-addImg")
   infoAddImg.innerText = "jpg, png: max 4MB";
   // Create the form information container
   const containerFormInfo = document.createElement("div");
@@ -488,7 +488,6 @@ document.addEventListener("click", function (event) {
  */
 document.addEventListener("click", function (event) {
   if (event.target.matches(".delete-work")) {
-    event.preventDefault();
     modalAlert("Deletion of work id=" + event.target.name);
     deleteWorksData(event.target.id);
   }
@@ -510,7 +509,6 @@ document.addEventListener("click", function (event) {
  */
 document.addEventListener("click", function (event) {
   if (event.target.matches(".go-back-button")) {
-    event.preventDefault();
     goBackModal();
   }
 });
@@ -522,7 +520,7 @@ document.addEventListener("change", function (event) {
   if (event.target.matches(".input-image")) {
     const imgPreview = document.querySelector(".img-preview");
     const labelAddImg = document.querySelector(".labelAddImg");
-    const infoAddImg = document.querySelector(".info-addImg");
+        const infoAddImg = document.querySelector(".info-addImg")
     const file = event.target.files[0];
     const reader = new FileReader();
     const allowedFormats = ["image/jpeg", "image/png"];
@@ -530,7 +528,7 @@ document.addEventListener("change", function (event) {
       reader.addEventListener("load", () => {
         imgPreview.src = reader.result;
         labelAddImg.style.display = "none";
-        infoAddImg.style.display = "none";
+        infoAddImg.style.display = "none"
       });
       if (file) {
         reader.readAsDataURL(file);
@@ -553,7 +551,6 @@ document.addEventListener("change", function (event) {
 document.addEventListener("click", function (event) {
   event.preventDefault;
   if (event.target.matches(".js-add-works")) {
-    event.preventDefault();
     const formAddWorks = document.querySelector(".form-add-works");
     if (formAddWorks.checkValidity()) {
       sendData();
