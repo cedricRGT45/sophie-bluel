@@ -497,8 +497,9 @@ document.addEventListener("click", function (event) {
   if (event.target.matches(".delete-work")) {
     modalAlert("Deletion of work id=" + event.target.name);
     deleteWorksData(event.target.id);
-    event.preventDefault()
-    window.preventDefault()
+    displayModalDeleteWorks();
+    event.preventDefault();
+    window.preventDefault();
   }
 });
 
