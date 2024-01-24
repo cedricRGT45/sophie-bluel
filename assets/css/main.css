@@ -630,7 +630,6 @@ dialog::backdrop{
   padding: 1rem;
   font-family: "Syne";
   color: white;
-  animation: skewX 500ms 300ms forwards;
 }
 
 .modal__alert-btn:hover {
@@ -651,32 +650,7 @@ flex-wrap:wrap;
 };
   
 /*animation*/
-@keyframes skewX {
-  0% {
-    transform: skewX(-30deg);
-    background: white;
-  }
-  5% {
-    transform: skewX(30deg);
-    background: #b1663c;
-  }
-  10% {
-    transform: skewX(-25deg);
-    background: white;
-  }
-  15% {
-    transform: skewX(25deg);
-    background: #b1663c;
 
-  }
-  20% {
-    transform: skewX(-15deg);
-    background: white;
-  }
-  100% {
-    transform: skewX(0deg);
-  }
-}
 @keyframes slide-in {
   from {
     opacity: 0;
