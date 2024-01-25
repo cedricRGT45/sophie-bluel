@@ -1,11 +1,11 @@
 import { modalAlert } from "./login.js";
 
-const urlCategories = "https://portfolio-sophie-bluel-api.onrender.com/api/categories";
-const urlWorks = "https://portfolio-sophie-bluel-api.onrender.com/api/works";
-const urlLogin = "https://portfolio-sophie-bluel-api.onrender.com/api/users/login";
+const urlCategories = "https://portfolio-sophie-bluel-api.onrender.com/categories";
+const urlWorks = "https://portfolio-sophie-bluel-api.onrender.com/works";
+const urlLogin = "https://portfolio-sophie-bluel-api.onrender.com/users/login";
 let selectedCategoryId = 0; // by default, display all works
 
-/**https://portfolio-sophie-bluel-api.onrender.com/
+/**http://localhost:5678/
  * Delete works from the index.html gallery
  */
 function deleteWorks() {
@@ -44,7 +44,7 @@ function displayWorks() {
           image.setAttribute("src", work.imageUrl);
           image.alt = work.title;
           const figCaption = document.createElement("figcaption");
-          figCaption.innerText = work.title;
+          figCaption.textContent = work.title;
           // Attach created elements to the DOM
           gallery.appendChild(figure);
           figure.append(image, figCaption);
@@ -82,7 +82,7 @@ function displayFilters() {
         for (let category of data) {
           const button = document.createElement("button");
           button.classList.add("button-filter");
-          button.innerText = category.name;
+          button.textContent = category.name;
           button.value = category.id;
           // Attach filter buttons to the DOM
           divFilters.appendChild(button);
@@ -169,14 +169,14 @@ function displayModalDeleteWorks() {
   closeModalButton.classList.add("fa-solid", "fa-xmark", "close-modal-button");
   // Create the modal title
   const titleModal = document.createElement("h3");
-  titleModal.innerText = "Gallerie Photo";
+  titleModal.textContent = "Gallerie Photo";
   // Create the gallery container
   const containerGallery = document.createElement("div");
   containerGallery.setAttribute("id", "modal-gallery");
   // Create the "Add photo" button to switch to the works addition modal
   const addWorkButton = document.createElement("button");
   addWorkButton.classList.add("link-modal-add");
-  addWorkButton.innerText = "Ajouter une photo";
+  addWorkButton.textContent = "Ajouter une photo";
 
   // Attach all the above elements to the DOM
   modalNav.append(closeModalButton);
@@ -226,7 +226,7 @@ async function displayWorksModal() {
  * Delete works from the API
  */
 function deleteWorksData(id) {
-  fetch(`https://portfolio-sophie-bluel-api.onrender.com/api/works/${id}`, {
+  fetch(`https://portfolio-sophie-bluel-api.onrender.com/works/${id}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/Json",
@@ -267,7 +267,7 @@ function displayModalAddWork() {
   closeModalButton.classList.add("fa-solid", "fa-xmark", "close-modal-button");
   // Create the modal title
   const titleModal = document.createElement("h3");
-  titleModal.innerText = "Ajout photo";
+  titleModal.textContent = "Ajout photo";
   // Attach the above elements to the DOM
   modalNav.append(goBackButton, closeModalButton);
   modalWrapper.append(modalNav, titleModal);
@@ -307,7 +307,7 @@ function displayFormAddWork() {
   const labelAddImgButton = document.createElement("label");
   labelAddImgButton.setAttribute("for", "file");
   labelAddImgButton.classList.add("labelAddImg");
-  labelAddImgButton.innerText = "+ Ajouter photo";
+  labelAddImgButton.textContent = "+ Ajouter photo";
   // Create the file input
   const addImgButton = document.createElement("input");
   addImgButton.type = "file";
@@ -318,14 +318,14 @@ function displayFormAddWork() {
   // Create the file information line
   const infoAddImg = document.createElement("p");
   infoAddImg.classList.add("info-addImg");
-  infoAddImg.innerText = "jpg, png: max 4MB";
+  infoAddImg.textContent = "jpg, png: max 4MB";
   // Create the form information container
   const containerFormInfo = document.createElement("div");
   containerFormInfo.classList.add("container-form-info");
   // Create the title label
   const labelTitle = document.createElement("label");
   labelTitle.setAttribute("for", "title");
-  labelTitle.innerText = "Titre";
+  labelTitle.textContent = "Titre";
   // Create the title input
   let inputTitle = document.createElement("input");
   inputTitle.setAttribute("type", "text");
@@ -336,7 +336,7 @@ function displayFormAddWork() {
   // Create the category label
   const labelCategory = document.createElement("label");
   labelCategory.setAttribute("for", "category");
-  labelCategory.innerText = "Catégorie";
+  labelCategory.textContent = "Catégorie";
   // Create the category select
   const selectCategory = document.createElement("select");
   selectCategory.setAttribute("id", "selectCategory");
@@ -345,14 +345,20 @@ function displayFormAddWork() {
   // Get category options
   setOptionsSelectForm();
   // Create the submit button
-  const validForm = document.createElement("button");
-  validForm.classList.add("js-add-works");
-  validForm.innerText = "Submit";
-  validForm.style.backgroundColor = "#A7A7A7";
+  const validFormLabel = document.createElement("label")
+  validFormLabel.getAttribute("for","js-validForm-btn")
+  validFormLabel.classList.add("js-add-works");
+  validFormLabel.textContent = "Valider";
+  validFormLabel.style.backgroundColor = "#A7A7A7";
+  const validForm = document.createElement("input");
+  validForm.getAttribute("type", "submit")
+  validForm.getAttribute("id", "js-validForm-btn")
+  validForm.style.display="none"
+  validFormLabel.appendChild(validForm)
   //validForm.disabled = true;
   // Attach the above elements to the DOM
   modalWrapper.appendChild(formAddWork);
-  formAddWork.append(containerFormImg, containerFormInfo, validForm);
+  formAddWork.append(containerFormImg, containerFormInfo, validFormLabel);
   containerFormImg.append(
     imgPreview,
     labelAddImgButton,
@@ -389,7 +395,7 @@ function setOptionsSelectForm() {
         option.classList.add("cat-option");
         option.setAttribute("id", category.id);
         option.setAttribute("name", category.name);
-        option.innerText = category.name;
+        option.textContent = category.name;
         const selectCategory = document.getElementById("selectCategory");
         selectCategory.append(option);
       }
@@ -444,7 +450,10 @@ function sendData() {
     .then((response) => {
       console.log(response);
       if (response.ok) {
-        console.log("Data sent successfully!");
+        modalAlert("Photo ajoutée avec succés")
+        console.log(
+          "Data sent successfully! if the picture is not displayed in the modal, it is due to a bug with the API host render.com, repeat another submition please"
+        );
         goBackModal();
       } else {
         console.error("Error sending data: ", response.status);

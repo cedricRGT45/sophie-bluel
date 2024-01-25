@@ -278,6 +278,7 @@ nav a {
 #login input[type="email"],
 #login input[type="password"] {
   padding: 1px 20px;
+
 }
 
 #contact label,
@@ -488,12 +489,12 @@ max-height: 6.77rem;
 
 .link-modal-add,
 .js-add-works {
+  width: fit-content;
+  max-width: 20rem;
   font-family: "Syne";
   font-size: 16px;
   font-weight: 700;
   line-height: 19px;
-  width: fit-content;
-  min-width: 237px;
   color: #ffffff;
   background-color: #1d6154;
   border: 0px;
