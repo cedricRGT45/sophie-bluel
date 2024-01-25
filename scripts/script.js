@@ -1,8 +1,10 @@
 import { modalAlert } from "./login.js";
 
-const urlCategories = "https://portfolio-sophie-bluel-api.onrender.com/categories";
-const urlWorks = "https://portfolio-sophie-bluel-api.onrender.com/works";
-const urlLogin = "https://portfolio-sophie-bluel-api.onrender.com/users/login";
+const urlCategories =
+  "https://portfolio-sophie-bluel-api.onrender.com/api/categories";
+const urlWorks = "https://portfolio-sophie-bluel-api.onrender.com/api/works";
+const urlLogin =
+  "https://portfolio-sophie-bluel-api.onrender.com/api/users/login";
 let selectedCategoryId = 0; // by default, display all works
 
 /**http://localhost:5678/
@@ -226,7 +228,7 @@ async function displayWorksModal() {
  * Delete works from the API
  */
 function deleteWorksData(id) {
-  fetch(`https://portfolio-sophie-bluel-api.onrender.com/works/${id}`, {
+  fetch(`https://portfolio-sophie-bluel-api.onrender.com/api/works/${id}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/Json",
@@ -345,16 +347,16 @@ function displayFormAddWork() {
   // Get category options
   setOptionsSelectForm();
   // Create the submit button
-  const validFormLabel = document.createElement("label")
-  validFormLabel.getAttribute("for","js-validForm-btn")
+  const validFormLabel = document.createElement("label");
+  validFormLabel.getAttribute("for", "js-validForm-btn");
   validFormLabel.classList.add("js-add-works");
   validFormLabel.textContent = "Valider";
   validFormLabel.style.backgroundColor = "#A7A7A7";
   const validForm = document.createElement("input");
-  validForm.getAttribute("type", "submit")
-  validForm.getAttribute("id", "js-validForm-btn")
-  validForm.style.display="none"
-  validFormLabel.appendChild(validForm)
+  validForm.getAttribute("type", "submit");
+  validForm.getAttribute("id", "js-validForm-btn");
+  validForm.style.display = "none";
+  validFormLabel.appendChild(validForm);
   //validForm.disabled = true;
   // Attach the above elements to the DOM
   modalWrapper.appendChild(formAddWork);
@@ -450,7 +452,7 @@ function sendData() {
     .then((response) => {
       console.log(response);
       if (response.ok) {
-        modalAlert("Photo ajoutée avec succés")
+        modalAlert("Photo ajoutée avec succés");
         console.log(
           "Data sent successfully! if the picture is not displayed in the modal, it is due to a bug with the API host render.com, repeat another submition please"
         );

@@ -44,7 +44,7 @@ async function onSubmit(event) {
 
   // Fetching data from the API
   let response = await fetch(
-    "https://portfolio-sophie-bluel-api.onrender.com/users/login",
+    "https://portfolio-sophie-bluel-api.onrender.com/api/users/login",
     {
       method: "POST",
       headers: {
