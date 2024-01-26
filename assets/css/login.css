@@ -13,7 +13,7 @@
 }
 
 .login__form {
-  width: 25%;
+  max-width: 23.68rem;
 }
 
 #login a {
