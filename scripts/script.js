@@ -1,8 +1,8 @@
 import { modalAlert } from "./login.js";
 
-const urlCategories = "https://portfolio-sophie-bluel-api.onrender.com/api/categories";
-const urlWorks = "https://portfolio-sophie-bluel-api.onrender.com/api/works";
-const urlLogin = "https://portfolio-sophie-bluel-api.onrender.com/api/users/login";
+const urlCategories = "http://localhost:5678/api/categories";
+const urlWorks = "http://localhost:5678/api/works";
+const urlLogin = "http://localhost:5678/api/users/login";
 let selectedCategoryId = 0; // by default, display all works
 
 /**http://localhost:5678/
@@ -226,7 +226,7 @@ async function displayWorksModal() {
  * Delete works from the API
  */
 function deleteWorksData(id) {
-  fetch(`https://portfolio-sophie-bluel-api.onrender.com/api/works/${id}`, {
+  fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/Json",
@@ -448,51 +448,69 @@ function sendData() {
     body: formData,
   })
     .then((response) => {
-      console.log(response);
       if (response.ok) {
         modalAlert("Photo ajoutée avec succés");
-        console.log(
-          "Data sent successfully! if the picture is not displayed in the modal, it is due to a bug with the API host render.com, repeat another submition please"
-        );
         goBackModal();
       } else {
         console.error("Error sending data: ", a.status);
       }
     })
     .catch((error) => console.error("Error sending data: ", error));
-}
-
-/**
- * Update the gallery on the modal and the page without reloading
- */
-async function updateGallery() {
-  // Update the main gallery on the page
-  displayWorks();
-
-  // Update the modal gallery
-  const modalGallery = document.getElementById("modal-gallery");
-  while (modalGallery.firstChild) {
-    modalGallery.removeChild(modalGallery.firstChild);
   }
-  await displayWorksModal();
-}
-
-// Event listings
-/**
- * EVENT: Filter works when clicking on the chosen category
- */
-document.addEventListener("click", function (event) {
-  if (event.target.matches(".button-filter")) {
-    filterWorks();
+  
+  /**
+   * Update the gallery on the modal and the page without reloading
+  */
+ async function updateGallery() {
+   // Update the main gallery on the page
+   displayWorks();
+   
+   // Update the modal gallery
+   const modalGallery = document.getElementById("modal-gallery");
+   while (modalGallery.firstChild) {
+     modalGallery.removeChild(modalGallery.firstChild);
+    }
+    await displayWorksModal();
   }
-});
+  
+  // Function to check the contact form before sending
+  async function verifContactForm() {
+    const contactForm = document.querySelector("#contact-form");
+    const validContactForm = document.querySelector(".contact-submit");
+    const requiredElements = document.querySelectorAll(".contact-input");
+    
+    requiredElements.forEach((element) => {
+      element.addEventListener("input", function () {
+        if (contactForm.checkValidity()) {
+          validContactForm.value = "Envoyer";
+          validContactForm.disabled = false;
+  
+        } else {
+          validContactForm.disabled = true;
+          validContactForm.style.width = "auto";
+          validContactForm.style.minWidth = "180px";
+          validContactForm.value = "Veuillez remplir tous les champs";
+        }
+      });
+    });
+  }
 
-/**
- * EVENT: Logout when clicking on the logout button
- */
-document.addEventListener("click", function (event) {
-  if (event.target.matches("#login")) {
-    sessionStorage.removeItem("token");
+  // Event listings
+  /**
+   * EVENT: Filter works when clicking on the chosen category
+  */
+ document.addEventListener("click", function (event) {
+   if (event.target.matches(".button-filter")) {
+     filterWorks();
+    }
+  });
+  
+  /**
+   * EVENT: Logout when clicking on the logout button
+  */
+ document.addEventListener("click", function (event) {
+   if (event.target.matches("#login")) {
+     sessionStorage.removeItem("token");
   }
 });
 
@@ -524,7 +542,7 @@ document.addEventListener(
   "click",
   await function (event) {
     if (event.target.matches(".delete-work")) {
-      event.preventDefault(); // Ajoutez cette ligne pour empêcher le rechargement de la page
+      event.preventDefault(); 
       deleteWorksData(event.target.id);
       modalAlert("Suppression de la photo effectuée");
       // Update galleries after deletion
@@ -599,35 +617,26 @@ document.addEventListener("click", function (event) {
     }
   }
 });
-// Function to check the contact form before sending it
-function verifContactForm() {
-  const contactForm = document.querySelector("#contact-form");
-  console.log(contactForm)
-  const validContactForm = document.querySelector(".contact-submit");
-  const requiredElements = document.querySelectorAll(".contact-input");
-  requiredElements.forEach((element) => {
-    element.addEventListener("input", function () {
-      if (contactForm.checkValidity()) {
-        validContactForm.value = "Envoyer";
-        validContactForm.disabled = false;
-      } else {
-        validContactForm.style.width = "auto"
-        validContactForm.style.minWidth = "180px"
-        validContactForm.value = "Veuillez remplir tous les champs";
-      }
-    });
-  });
-}
 
-document.querySelector("#contact-form").addEventListener("submit", ()=>{
-modalAlert("Message envoyé")
-})
+//event on the submit contact form
+document.querySelector("#contact-form").addEventListener("submit", () => {
+  const contactForm = document.querySelector("#contact")
+  const contactName = document.getElementById("name")
+  let contactNameText = contactName.value
+  let contactNameTextUp =  contactNameText.toUpperCase()
+  contactForm.innerHTML = `<h3>MERCI ${contactNameTextUp}</h3>
+  <p>Je prendrai contact avec vous dès que j'aurai pris connaissance de votre message</p>
+  <h4><i>SOPHIE BLUEL</i></h4>`;
+  contactForm.classList.add("contact-form")
+  
+});
 
-/**
- * Trigger functions on page load
-*/
+
+
+//Trigger functions on page load
+
 async function init() {
-  verifContactForm()
+  verifContactForm();
   displayWorks();
   displayFilters();
   displayAdminMode();
