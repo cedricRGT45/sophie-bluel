@@ -1,10 +1,8 @@
 import { modalAlert } from "./login.js";
 
-const urlCategories =
-  "https://portfolio-sophie-bluel-api.onrender.com/api/categories";
+const urlCategories = "https://portfolio-sophie-bluel-api.onrender.com/api/categories";
 const urlWorks = "https://portfolio-sophie-bluel-api.onrender.com/api/works";
-const urlLogin =
-  "https://portfolio-sophie-bluel-api.onrender.com/api/users/login";
+const urlLogin = "https://portfolio-sophie-bluel-api.onrender.com/api/users/login";
 let selectedCategoryId = 0; // by default, display all works
 
 /**http://localhost:5678/
@@ -85,7 +83,7 @@ function displayFilters() {
           const button = document.createElement("button");
           button.classList.add("button-filter");
           button.textContent = category.name;
-          button.value = category.id;
+          button.id = category.id;
           // Attach filter buttons to the DOM
           divFilters.appendChild(button);
         }
@@ -102,7 +100,7 @@ function displayFilters() {
  */
 function filterWorks() {
   // Update the selected category identifier
-  selectedCategoryId = parseInt(event.target.value);
+  selectedCategoryId = parseInt(event.target.id);
   // Display filtered works
   displayWorks();
 }
@@ -357,7 +355,7 @@ function displayFormAddWork() {
   validForm.getAttribute("id", "js-validForm-btn");
   validForm.style.display = "none";
   validFormLabel.appendChild(validForm);
-  //validForm.disabled = true;
+
   // Attach the above elements to the DOM
   modalWrapper.appendChild(formAddWork);
   formAddWork.append(containerFormImg, containerFormInfo, validFormLabel);
@@ -458,7 +456,7 @@ function sendData() {
         );
         goBackModal();
       } else {
-        console.error("Error sending data: ", response.status);
+        console.error("Error sending data: ", a.status);
       }
     })
     .catch((error) => console.error("Error sending data: ", error));
@@ -493,7 +491,7 @@ document.addEventListener("click", function (event) {
  * EVENT: Logout when clicking on the logout button
  */
 document.addEventListener("click", function (event) {
-  if (event.target.matches("#logout")) {
+  if (event.target.matches("#login")) {
     sessionStorage.removeItem("token");
   }
 });
@@ -601,11 +599,35 @@ document.addEventListener("click", function (event) {
     }
   }
 });
+// Function to check the contact form before sending it
+function verifContactForm() {
+  const contactForm = document.querySelector("#contact-form");
+  console.log(contactForm)
+  const validContactForm = document.querySelector(".contact-submit");
+  const requiredElements = document.querySelectorAll(".contact-input");
+  requiredElements.forEach((element) => {
+    element.addEventListener("input", function () {
+      if (contactForm.checkValidity()) {
+        validContactForm.value = "Envoyer";
+        validContactForm.disabled = false;
+      } else {
+        validContactForm.style.width = "auto"
+        validContactForm.style.minWidth = "180px"
+        validContactForm.value = "Veuillez remplir tous les champs";
+      }
+    });
+  });
+}
+
+document.querySelector("#contact-form").addEventListener("submit", ()=>{
+modalAlert("Message envoyé")
+})
 
 /**
  * Trigger functions on page load
- */
+*/
 async function init() {
+  verifContactForm()
   displayWorks();
   displayFilters();
   displayAdminMode();
