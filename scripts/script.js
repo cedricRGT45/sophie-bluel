@@ -427,6 +427,7 @@ function sendData() {
   const choice = selectCategory.selectedIndex;
   const category = selectCategory.options[choice].id;
   const file = document.getElementById("file").files[0];
+
   // Create formData object
   const formData = new FormData();
   formData.append("image", file);
@@ -435,6 +436,7 @@ function sendData() {
 
   // Get the token
   const token = sessionStorage.getItem("token");
+
   // Send data to the server with an HTTP POST request
   fetch(urlWorks, {
     method: "POST",
@@ -452,63 +454,62 @@ function sendData() {
       }
     })
     .catch((error) => console.error("Error sending data: ", error));
-  }
-  
-  /**
-   * Update the gallery on the modal and the page without reloading
-  */
- async function updateGallery() {
-   // Update the main gallery on the page
-   displayWorks();
-   
-   // Update the modal gallery
-   const modalGallery = document.getElementById("modal-gallery");
-   while (modalGallery.firstChild) {
-     modalGallery.removeChild(modalGallery.firstChild);
-    }
-     displayWorksModal();
-  }
-  
-  // Function to check the contact form before sending
-  async function verifContactForm() {
-    const contactForm = document.querySelector("#contact-form");
-    const validContactForm = document.querySelector(".contact-submit");
-    const requiredElements = document.querySelectorAll(".contact-input");
-    
-    requiredElements.forEach((element) => {
-      element.addEventListener("input", function () {
-        if (contactForm.checkValidity()) {
-          validContactForm.value = "Envoyer";
-          validContactForm.disabled = false;
-  
-        } else {
-          validContactForm.disabled = true;
-          validContactForm.style.width = "auto";
-          validContactForm.style.minWidth = "180px";
-          validContactForm.style.paddingRight="2rem";
-          validContactForm.style.paddingLeft="2rem";
-          validContactForm.value = "Veuillez remplir tous les champs";
-        }
-      });
-    });
-  }
+}
 
-  // Event listings
-  /**
-   * EVENT: Filter works when clicking on the chosen category
-  */
- document.addEventListener("click", function (event) {
-   if (event.target.matches(".button-filter")) {
-     filterWorks();
-    }
+/**
+ * Update the gallery on the modal and the page without reloading
+ */
+async function updateGallery() {
+  // Update the main gallery on the page
+  displayWorks();
+
+  // Update the modal gallery
+  const modalGallery = document.getElementById("modal-gallery");
+  while (modalGallery.firstChild) {
+    modalGallery.removeChild(modalGallery.firstChild);
+  }
+  displayWorksModal();
+}
+
+// Function to check the contact form before sending
+async function verifContactForm() {
+  const contactForm = document.querySelector("#contact-form");
+  const validContactForm = document.querySelector(".contact-submit");
+  const requiredElements = document.querySelectorAll(".contact-input");
+
+  requiredElements.forEach((element) => {
+    element.addEventListener("input", function () {
+      if (contactForm.checkValidity()) {
+        validContactForm.value = "Envoyer";
+        validContactForm.disabled = false;
+      } else {
+        validContactForm.disabled = true;
+        validContactForm.style.width = "auto";
+        validContactForm.style.minWidth = "180px";
+        validContactForm.style.paddingRight = "2rem";
+        validContactForm.style.paddingLeft = "2rem";
+        validContactForm.value = "Veuillez remplir tous les champs";
+      }
+    });
   });
-  
-  /**
-   * EVENT: Logout when clicking on the logout button
-  */
- document.addEventListener("click", function (event) {
-   if (event.target.matches("#login")) {
-     sessionStorage.removeItem("token");
+}
+
+// Event listings
+/**
+ * EVENT: Filter works when clicking on the chosen category
+ */
+document.addEventListener("click", function (event) {
+  if (event.target.matches(".button-filter")) {
+    filterWorks();
+  }
+});
+
+/**
+ * EVENT: Logout when clicking on the logout button
+ */
+document.addEventListener("click", function (event) {
+  if (event.target.matches("#login")) {
+    sessionStorage.removeItem("token");
   }
 });
 
@@ -536,24 +537,22 @@ document.addEventListener("click", function (event) {
 /**
  * EVENT: Delete works on the modal and index.html when clicking on the trash can
  */
-document.addEventListener(
-  "click", (event)=>{
-    if (event.target.matches(".delete-work")) {
-      event.preventDefault(); 
-      deleteWorksData(event.target.id);
-      modalAlert("Suppression de la photo effectuée");
-      // Update galleries after deletion
-      updateGallery();
-    }
+document.addEventListener("click", (event) => {
+  if (event.target.matches(".delete-work")) {
+    event.preventDefault();
+    deleteWorksData(event.target.id);
+    modalAlert("Suppression de la photo effectuée");
+    // Update galleries after deletion
+    updateGallery();
   }
-);
+});
 
 /**
  * EVENT: Transfer to the work addition modal when clicking on the add photo button
  */
 document.addEventListener("click", function (event) {
   if (event.target.matches(".link-modal-add")) {
-    event.preventDefault()
+    event.preventDefault();
     const modalWrapper = document.querySelector(".modal-wrapper-delete");
     modalWrapper.style.display = "none";
     displayModalAddWork();
@@ -616,20 +615,19 @@ document.addEventListener("click", function (event) {
   }
 });
 
-//event on the submit contact form
+/**
+ * EVENT: Display a confirmation message for the contact form submission
+ */
 document.querySelector("#contact-form").addEventListener("submit", () => {
-  const contactForm = document.querySelector("#contact")
-  const contactName = document.getElementById("name")
-  let contactNameText = contactName.value
-  let contactNameTextUp =  contactNameText.toUpperCase()
+  const contactForm = document.querySelector("#contact");
+  const contactName = document.getElementById("name");
+  let contactNameText = contactName.value;
+  let contactNameTextUp = contactNameText.toUpperCase();
   contactForm.innerHTML = `<h3>MERCI ${contactNameTextUp}</h3>
   <p>Je prendrai contact avec vous dès que j'aurai pris connaissance de votre message</p>
   <h4><i>SOPHIE BLUEL</i></h4>`;
-  contactForm.classList.add("contact-form")
-  
+  contactForm.classList.add("contact-form");
 });
-
-
 
 //Trigger functions on page load
 
