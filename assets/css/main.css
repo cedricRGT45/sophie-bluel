@@ -150,7 +150,7 @@ p {
   color: #3d3d3d;
   font-family: "Work Sans";
   font-size: 14px;
-  text-shadow: .01rem .01rem .01rem white;
+  text-shadow: 0.01rem 0.01rem 0.01rem white;
 }
 
 h1 {
@@ -300,7 +300,7 @@ input[type="submit"] {
   text-align: center;
   border-radius: 60px;
 }
-/*Contact form after submition*/
+/*Contact form after submission*/
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -316,13 +316,26 @@ input[type="submit"] {
   padding: 2rem;
   text-align: center;
   font-family: "Syne";
-  font-weight: 600;
   border: none;
   border-radius: 2rem;
-  position:relative;
+  position: relative;
   animation: slide-in 300ms ease-in forwards;
 }
 
+.contact-form p {
+  font-size: 1.5rem;
+  font-weight:600
+}
+
+.contact-form H3 {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.contact-form H4 {
+  font-size: 1.25rem;
+  font-weight: 900;
+}
 footer {
   background-color: #ffffff;
   height: 60px;
@@ -424,8 +437,6 @@ footer nav ul {
   margin-top: -51px;
   margin-right: 33%;
 }
-
-
 
 #modal {
   width: 39.75rem;

@@ -450,7 +450,6 @@ function sendData() {
     .then((response) => {
       if (response.ok) {
         modalAlert("Photo ajoutée avec succés");
-        goBackModal();
       } else {
         console.error("Error sending data: ", a.status);
       }
@@ -470,7 +469,7 @@ function sendData() {
    while (modalGallery.firstChild) {
      modalGallery.removeChild(modalGallery.firstChild);
     }
-    await displayWorksModal();
+     displayWorksModal();
   }
   
   // Function to check the contact form before sending
@@ -489,6 +488,8 @@ function sendData() {
           validContactForm.disabled = true;
           validContactForm.style.width = "auto";
           validContactForm.style.minWidth = "180px";
+          validContactForm.style.paddingRight="2rem";
+          validContactForm.style.paddingLeft="2rem";
           validContactForm.value = "Veuillez remplir tous les champs";
         }
       });
@@ -539,8 +540,7 @@ document.addEventListener("click", function (event) {
  * EVENT: Delete works on the modal and index.html when clicking on the trash can
  */
 document.addEventListener(
-  "click",
-  await function (event) {
+  "click", (event)=>{
     if (event.target.matches(".delete-work")) {
       event.preventDefault(); 
       deleteWorksData(event.target.id);
@@ -556,6 +556,7 @@ document.addEventListener(
  */
 document.addEventListener("click", function (event) {
   if (event.target.matches(".link-modal-add")) {
+    event.preventDefault()
     const modalWrapper = document.querySelector(".modal-wrapper-delete");
     modalWrapper.style.display = "none";
     displayModalAddWork();
@@ -607,8 +608,8 @@ document.addEventListener("change", function (event) {
  * EVENT: Send form data when clicking on the submit button
  */
 document.addEventListener("click", function (event) {
-  event.preventDefault;
   if (event.target.matches(".js-add-works")) {
+    event.preventDefault();
     const formAddWorks = document.querySelector(".form-add-works");
     if (formAddWorks.checkValidity()) {
       sendData();
