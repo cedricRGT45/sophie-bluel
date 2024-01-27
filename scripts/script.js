@@ -5,9 +5,6 @@ const urlWorks = "http://localhost:5678/api/works";
 const urlLogin = "http://localhost:5678/api/users/login";
 let selectedCategoryId = 0; // by default, display all works
 
-/**http://localhost:5678/
- * Delete works from the index.html gallery
- */
 function deleteWorks() {
   // Get the gallery element from index.html
   const gallery = document.getElementsByClassName("gallery").item(0);

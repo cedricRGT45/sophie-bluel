@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 23.68rem;
 }
 
 #login {
@@ -12,9 +13,6 @@
   margin-bottom: 22rem;
 }
 
-#form{
-  max-width: 23.68rem;
-}
 
 #login a {
   text-decoration: underline;
